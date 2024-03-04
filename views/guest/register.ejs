@@ -221,7 +221,7 @@
                 $('#responseMessage').html(response?.message)
             },
             error: function(xhr, status, error){
-                $('#responseMessage').html(xhr.responseJSON.message);
+                $('#responseMessage').html(xhr?.responseJSON?.message);
             }
         });
     })
