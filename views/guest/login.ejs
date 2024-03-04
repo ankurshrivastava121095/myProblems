@@ -1,0 +1,77 @@
+<%- include('../components/header.ejs') %>  
+		
+
+    <div class="hero-wrap js-fullheight" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+                <div class="col-md-7 ftco-animate">
+                    <h2 class="subheading">Welcome to myProblems.com</h2>
+                    <h1 class="mb-4">Your Civic Solution Partners</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="ftco-section ftco-book ftco-no-pt ftco-no-pb">
+    	<div class="container">
+	    	<div class="row justify-content-end">
+	    		<div class="col-lg-4">
+                    <form action="/login-verify" method="POST" class="appointment-form">
+                        <h3 class="mb-3">Login to Get Started</h3>
+                        <% if(succMessage.length > 0){ %>
+                            <span><%= succMessage %></span>
+                        <% } %>
+                        <% if(errMsg.length > 0){ %>
+                            <span><%= errMsg %></span>
+                        <% } %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" name="email" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                                    <div style="cursor: pointer;" id="showPass">Show Password</div>
+                                    <div style="cursor: pointer;" id="hidePass">Hide Password</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="submit" value="Login" class="btn btn-primary py-3 px-4">
+                                </div>
+                            </div>
+                            <div class="col-md-12">    
+                                <a href="/forget-password">Forget Password ?</a>
+                            </div>
+                            <div class="col-md-12 mt-4">    
+                                <div>Don't have account ? <a href="/register">Click here</a> to Register</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+	    	</div>
+	    </div>
+    </section>
+
+    <script>
+        $(document).ready(function() {
+            $('#hidePass').hide()
+        });
+
+        $('#showPass').click(function(){
+            $('#password').attr('type', 'text');
+            $('#hidePass').show()
+            $('#showPass').hide()
+        })
+       
+        $('#hidePass').click(function(){
+            $('#password').attr('type', 'password');
+            $('#showPass').show()
+            $('#hidePass').hide()
+        })
+    </script>
+
+<%- include('../components/footer.ejs') %>  
