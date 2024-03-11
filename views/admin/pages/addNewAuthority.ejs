@@ -19,31 +19,37 @@
             <div class="col-md-8 mb-3 d-flex services optionSection align-self-stretch px-4 ftco-animate">
                 <div class="d-block services-wrap text-center" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                     <div class="media-body py-4 px-3">
-                        <h3 class="heading">Register New complaint</h3>
-                        <p>Simply fill out our user-friendly form with details about the issue you're facing, and our team will swiftly address your concerns.</p>
+                        <h3 class="heading">Register New Authority</h3>
+                        <p>Simply fill out our user-friendly form with details to register new Authority.</p>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="title">Title <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                                    <label for="firstName">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Enter First Name">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="problemImage">Image <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" id="problemImage">
+                                    <label for="lastName">Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="description">Description <span class="text-danger">*</span></label>
-                                    <textarea rows="3" id="description" class="form-control" placeholder="Enter Description"></textarea>
+                                    <label for="email">Email <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="email" placeholder="Enter Email">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="address">Address <span class="text-danger">*</span></label>
-                                    <textarea rows="3" id="address" class="form-control" placeholder="Enter Address"></textarea>
+                                    <label for="phone">Phone <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Enter Phone">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="password">Password <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="password" placeholder="Enter Password">
                                 </div>
                             </div>
                         </div>
@@ -67,19 +73,21 @@
         $('#submitButton').hide()
         $('#loadingButton').show()
 
-        const title = $('#title').val().trim()
-        const description = $('#description').val().trim()
-        const address = $('#address').val().trim()
-        const problemImage = $('#problemImage')[0].files[0]
+        const firstName = $('#firstName').val().trim()
+        const lastName = $('#lastName').val().trim()
+        const email = $('#email').val().trim()
+        const phone = $('#phone').val().trim()
+        const password = $('#email').val().trim()
 
         const formData = new FormData();
-        formData.append('title', title);
-        formData.append('description', description);
-        formData.append('address', address);
-        formData.append('problemImage', problemImage);
+        formData.append('firstName', firstName);
+        formData.append('lastName', lastName);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('password', password);
 
         $.ajax({
-            url: '/user/store-complaint',
+            url: '/admin/store-authority',
             type: 'POST',
             processData: false,
             contentType: false,
@@ -92,9 +100,12 @@
                     icon: "success"
                 });
 
-                const title = $('#title').val('')
-                const description = $('#description').val('')
-                const address = $('#address').val('')
+                $('#firstName').val().trim()
+                $('#lastName').val().trim()
+                $('#email').val().trim()
+                $('#phone').val().trim()
+                $('#email').val().trim()
+
                 $('#submitButton').show()
                 $('#loadingButton').hide()
             },

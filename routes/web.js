@@ -34,7 +34,11 @@ router.get('/admin/submitted-request',Auth,AdminComplaintController.submittedReq
 router.get('/admin/request-detail/:id',Auth,AdminComplaintController.requestDetail)
 router.post('/user/change-complaint-status/:id',Auth,AdminComplaintController.changeStatus)
 // Admin/AdminAuthorityController
-router.get('/admin/authory',Auth,AdminAuthorityController.allAuthorities)
+router.get('/admin/add-authority',Auth,AdminAuthorityController.add)
+router.get('/admin/edit-authority/:id',Auth,AdminAuthorityController.edit)
+router.post('/admin/store-authority',Auth,AdminAuthorityController.store)
+router.post('/admin/update-authority/:id',Auth,AdminAuthorityController.update)
+router.get('/admin/authority',Auth,AdminAuthorityController.allAuthorities)
 router.get('/admin/single-authority-work/:id',Auth,AdminAuthorityController.singleAuthorityWork)
 // Admin/AdminUserController
 router.get('/admin/users',Auth,AdminUserController.allUsers)

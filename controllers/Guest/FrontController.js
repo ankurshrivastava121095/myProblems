@@ -41,12 +41,12 @@ class FrontController {
                 if (!nameRegex.test(firstName) || !nameRegex.test(lastName) || !phoneRegex.test(phone)) {
                     res.status(400).json({ 'status': 'failed', 'message': 'First and Last Name must be alphabets and Phone must be Number starts from 6-9 with 10 Digit length' })
                 } else {
-                    const isUserExistWithEmail = await UserModel.findOne({ email: email })
+                    const isUserExistWithEmail = await UserModel.findOne({ email: email, role: 'user' })
 
                     if (isUserExistWithEmail) {
                         res.status(400).json({ 'status': 'failed', 'message': 'User Already Exist with this Email' })
                     } else {
-                        const isUserExistWithPhone = await UserModel.findOne({ phone: phone })
+                        const isUserExistWithPhone = await UserModel.findOne({ phone: phone, role: 'user' })
 
                         if (isUserExistWithPhone) {
                             res.status(400).json({ 'status': 'failed', 'message': 'User Already Exist with this Phone' })

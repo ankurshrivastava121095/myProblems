@@ -14,6 +14,11 @@
 
 <section class="ftco-section bg-light">
     <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-5">
+                <a href="/admin/add-authority" style="float: right;" class="btn btn-primary">Add New Authority</a>
+            </div>
+        </div>
         <div class="row d-flex" id="dataSection">
             <%
                 authorities.forEach((authority)=>{
@@ -23,10 +28,13 @@
                         <div class="text p-4 text-center">
                             <h3 class="heading"><a href="/admin/single-authority-work/<%= authority._id %>"><%= authority.firstName %> <%= authority.lastName %></a></h3>
                             <div class="meta mb-2">
-                                <div><a href="/admin/single-authority-work/<%= authority._id %>"><%= authority.email  %></a></div>
+                                <div><a href="/admin/single-authority-work/<%= authority._id %>"><i class="fa fa-envelope" aria-hidden="true"></i> <%= authority.email  %></a></div>
                             </div>
-                            <p><%= authority.phone %>...</p>
-                            <button type="button" class="btn btn-primary" onclick="window.location.pathname = '/admin/single-authority-work/<%= authority._id %>'">Compaint under this Authority</button>
+                            <p><i class="fa fa-phone" aria-hidden="true"></i> <%= authority.phone %></p>
+                            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 15px;">
+                                <button type="button" title="Click to edit this Authority" class="btn btn-warning" onclick="window.location.pathname = '/admin/edit-authority/<%= authority._id %>'">Edit</button>
+                                <button type="button" title="Compaint under this Authority" class="btn btn-primary" onclick="window.location.pathname = '/admin/single-authority-work/<%= authority._id %>'">Compaints</button>
+                            </div>
                         </div>
                     </div>
                 </div>
