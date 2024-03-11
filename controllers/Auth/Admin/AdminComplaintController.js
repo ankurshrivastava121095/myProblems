@@ -46,7 +46,7 @@ class AdminComplaintController {
                 ]);
 
                 const data = {firstName, lastName, email, _id, phone, role}
-                res.render('admin/pages/submittedRequest', { data, complaints })
+                res.render('admin/pages/submittedRequest', { data, complaints, succMessage : req.flash('succMsg'), errMsg : req.flash('error') })
             } else {
                 res.redirect(previousUrl);
             }
@@ -88,6 +88,29 @@ class AdminComplaintController {
 
                 req.flash('succMsg','Status Changed Successfully !')
                 res.redirect(previousUrl)
+            } else {
+                res.redirect(previousUrl);
+            }
+        } catch (err) {
+            console.log(err); 
+        }
+    }
+    
+    static deleteComplaint = async(req,res) => {
+        const previousUrl = req.get('Referer');
+        try {
+            const {firstName, lastName, email, _id, phone, role} = req.data
+
+            if (role == 'admin') {
+                const data = await ComplaintModel.findByIdAndDelete(req.params.id)
+
+                if (data) {
+                    req.flash('succMsg','Complaint Removed Permanently')
+                    res.redirect('/admin/submitted-request')
+                } else {
+                    req.flash('error','Internal Server Error')
+                    res.redirect('/admin/submitted-request')
+                }
             } else {
                 res.redirect(previousUrl);
             }

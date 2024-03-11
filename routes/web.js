@@ -42,6 +42,7 @@ router.get('/admin/dashboard',Auth,AdminDashboardController.dashboard)
 router.get('/admin/submitted-request',Auth,AdminComplaintController.submittedRequest)
 router.get('/admin/request-detail/:id',Auth,AdminComplaintController.requestDetail)
 router.post('/admin/change-complaint-status/:id',Auth,AdminComplaintController.changeStatus)
+router.get('/admin/remove-complaint/:id',Auth,AdminComplaintController.deleteComplaint)
 // Admin/AdminAuthorityController
 router.get('/admin/add-authority',Auth,AdminAuthorityController.add)
 router.get('/admin/edit-authority/:id',Auth,AdminAuthorityController.edit)
