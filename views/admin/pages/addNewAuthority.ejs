@@ -77,21 +77,18 @@
         const lastName = $('#lastName').val().trim()
         const email = $('#email').val().trim()
         const phone = $('#phone').val().trim()
-        const password = $('#email').val().trim()
-
-        const formData = new FormData();
-        formData.append('firstName', firstName);
-        formData.append('lastName', lastName);
-        formData.append('email', email);
-        formData.append('phone', phone);
-        formData.append('password', password);
+        const password = $('#password').val().trim()
 
         $.ajax({
             url: '/admin/store-authority',
             type: 'POST',
-            processData: false,
-            contentType: false,
-            data: formData,
+            data: {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                password: password,
+            },
             success: function(response){
                 $('#responseMessage').html(response?.message);
                 Swal.fire({

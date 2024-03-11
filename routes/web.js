@@ -8,6 +8,9 @@ const UserComplaintController = require('../controllers/Auth/User/UserComplaintC
 const AdminComplaintController = require('../controllers/Auth/Admin/AdminComplaintController')
 const AdminAuthorityController = require('../controllers/Auth/Admin/AdminAuthorityController')
 const AdminUserController = require('../controllers/Auth/Admin/AdminUserController')
+const AuthorityDashboardController = require('../controllers/Auth/Authority/AuthorityDashboardController')
+const AuthorityComplaintController = require('../controllers/Auth/Authority/AuthorityComplaintController')
+const AuthorityUserController = require('../controllers/Auth/Authority/AuthorityUserController')
 const router = express.Router()
 
 
@@ -22,6 +25,12 @@ router.get('/admin/register-as-admin',GuestAuth,FrontController.registerAsAdmin)
 router.post('/register-user',GuestAuth,FrontController.registerUser)
 router.post('/register-admin',GuestAuth,FrontController.registerAdmin)
 router.get('/logout',FrontController.logout)
+router.get('/forget-password',FrontController.forgetPassword)
+router.post('/find-user',FrontController.findUser)
+router.get('/otp-verification',FrontController.otpVerification)
+router.post('/verify-otp',FrontController.verifyOTP)
+router.get('/reset-password',FrontController.resetPassword)
+router.post('/change-password',FrontController.changePassword)
 
 
 
@@ -32,7 +41,7 @@ router.get('/admin/dashboard',Auth,AdminDashboardController.dashboard)
 // Admin/AdminComplaintController
 router.get('/admin/submitted-request',Auth,AdminComplaintController.submittedRequest)
 router.get('/admin/request-detail/:id',Auth,AdminComplaintController.requestDetail)
-router.post('/user/change-complaint-status/:id',Auth,AdminComplaintController.changeStatus)
+router.post('/admin/change-complaint-status/:id',Auth,AdminComplaintController.changeStatus)
 // Admin/AdminAuthorityController
 router.get('/admin/add-authority',Auth,AdminAuthorityController.add)
 router.get('/admin/edit-authority/:id',Auth,AdminAuthorityController.edit)
@@ -43,6 +52,20 @@ router.get('/admin/single-authority-work/:id',Auth,AdminAuthorityController.sing
 // Admin/AdminUserController
 router.get('/admin/users',Auth,AdminUserController.allUsers)
 router.get('/admin/single-user-complaints/:id',Auth,AdminUserController.singleUserComplaints)
+
+
+
+
+
+
+// Authority/AuthorityDashboardController
+router.get('/authority/dashboard',Auth,AuthorityDashboardController.dashboard)
+// Authority/AuthorityComplaintController
+router.get('/authority/show-complaints',Auth,AuthorityComplaintController.showComplaints)
+router.get('/authority/request-detail/:id',Auth,AuthorityComplaintController.requestDetail)
+router.post('/authority/change-complaint-status/:id',Auth,AuthorityComplaintController.changeStatus)
+// Authority/AuthorityUserController
+router.get('/authority/users',Auth,AuthorityUserController.allUsers)
 
 
 

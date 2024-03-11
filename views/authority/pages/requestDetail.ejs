@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs mb-2"><span class="mr-2"><a href="/admin/dashboard">Home <i class="fa fa-chevron-right"></i></a></span> <span>Complaint Detail <i class="fa fa-chevron-right"></i></span></p>
+                <p class="breadcrumbs mb-2"><span class="mr-2"><a href="/authority/dashboard">Home <i class="fa fa-chevron-right"></i></a></span> <span>Complaint Detail <i class="fa fa-chevron-right"></i></span></p>
                 <h1 class="mb-0 bread">Complaint Detail</h1>
             </div>
         </div>
@@ -43,14 +43,13 @@
                 <%
                     }
                 %>
-                <form action="/admin/change-complaint-status/<%= complaint._id %>" method="POST">
+                <form action="/authority/change-complaint-status/<%= complaint._id %>" method="POST">
                     <select name="status" id="status" class="form-select" onchange="this.form.submit()">
                         <option value="">Change Status</option>
                         <option value="Accept">Accept</option>
                         <option value="Reject">Reject</option>
                     </select>
                 </form>
-                <a href="/admin/remove-complaint/<%= complaint._id %>" class="btn btn-lg btn-danger my-3" style="width: 100%;"><i class="fa fa-trash" aria-hidden="true"></i> Click to Remove this Complaint</a>
             </div>
             <div class="col-md-4">
                 <div style="font-weight: bold;">Submitted By (User detail):</div>
