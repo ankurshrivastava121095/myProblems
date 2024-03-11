@@ -6,7 +6,7 @@ class FrontController {
 
     static login = async(req,res) => {
         try {
-            res.render('guest/login',{succMessage : req.flash('succMsg'), errMsg : req.flash('error')})
+            res.render('guest/pages/login',{succMessage : req.flash('succMsg'), errMsg : req.flash('error')})
         } catch (err) {
             console.log(err);
         }
@@ -14,7 +14,15 @@ class FrontController {
     
     static register = async(req,res) => {
         try {
-            res.render('guest/register')
+            res.render('guest/pages/register')
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    
+    static registerAsAdmin = async(req,res) => {
+        try {
+            res.render('guest/pages/registerAsAdmin')
         } catch (err) {
             console.log(err);
         }
@@ -68,6 +76,55 @@ class FrontController {
             console.log(`Error: ${err}`);
         }
     }
+    
+    static registerAdmin = async(req,res) => {
+        try {
+            const { firstName, lastName, email, phone, password } = req.body
+
+            if (firstName == '' || lastName == '' || email == '' || phone == '' || password == '') {
+                res.status(400).json({ 'status': 'failed', 'message': 'All fields are required' })
+            } else {
+                const nameRegex = /^[a-zA-Z]+$/;
+                const phoneRegex = /^[6-9]\d{9}$/;
+
+                if (!nameRegex.test(firstName) || !nameRegex.test(lastName) || !phoneRegex.test(phone)) {
+                    res.status(400).json({ 'status': 'failed', 'message': 'First and Last Name must be alphabets and Phone must be Number starts from 6-9 with 10 Digit length' })
+                } else {
+                    const isUserExistWithEmail = await UserModel.findOne({ email: email })
+
+                    if (isUserExistWithEmail) {
+                        res.status(400).json({ 'status': 'failed', 'message': 'User Already Exist with this Email' })
+                    } else {
+                        const isUserExistWithPhone = await UserModel.findOne({ phone: phone })
+
+                        if (isUserExistWithPhone) {
+                            res.status(400).json({ 'status': 'failed', 'message': 'User Already Exist with this Phone' })
+                        } else {
+                            const hashPassword = await bcrypt.hash(password,10)
+        
+                            const data = new UserModel({
+                                firstName: firstName,
+                                lastName: lastName,
+                                email: email,
+                                phone: phone,
+                                password: hashPassword,
+                                role: 'admin',
+                            })
+                            const dataSaved = data.save()
+                            
+                            if (dataSaved) {
+                                res.status(201).json({ 'status': 'success', 'message': 'You have registered successfully' })
+                            } else {
+                                res.status(400).json({ 'status': 'failed', 'message': 'Internal Server Error' })
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (err) {
+            console.log(`Error: ${err}`);
+        }
+    }
 
     static loginVerify = async(req,res) => {
         const previousUrl = req.get('Referer');
@@ -83,15 +140,14 @@ class FrontController {
                         if (user.isDeleted == 0) {
                             res.cookie('jwt',token)
 
-                            if (user.role == 'user') {
-                                // res.redirect('/user/dashboard')
-                                console.log('Logged In Successfully');
-                            }
                             if (user.role == 'admin') {
                                 res.redirect('/admin/dashboard')
                             }
                             if (user.role == 'authority') {
                                 res.redirect('/authority/dashboard')
+                            }
+                            if (user.role == 'user') {
+                                res.redirect('/user/dashboard')
                             }
                         } else {
                             res.clearCookie('jwt')
@@ -110,6 +166,15 @@ class FrontController {
                 req.flash('error','All Fields are required !')
                 res.redirect(previousUrl);
             }
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    static logout = async(req,res) => {
+        try{
+            res.clearCookie('jwt')
+            res.redirect('/')
         }catch(err){
             console.log(err)
         }

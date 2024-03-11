@@ -1,0 +1,52 @@
+<%- include('../components/header.ejs') %>
+
+<div class="hero-wrap js-fullheight" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+            <div class="col-md-7 ftco-animate">
+                <h2 class="subheading">Welcome to myProblems.com</h2>
+                <h1 class="mb-4">Your Civic Solution Partners</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section ftco-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3 d-flex services optionSection align-self-stretch px-4 ftco-animate">
+                <div class="d-block services-wrap text-center" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                    <div class="img" style="background-image: url(/images/registerNewComplaint.png);"></div>
+                    <div class="media-body py-4 px-3">
+                        <h3 class="heading">Register New complaint</h3>
+                        <p>Simply fill out our user-friendly form with details about the issue you're facing, and our team will swiftly address your concerns.</p>
+                        <p><a href="/user/register-new-complaint" class="btn btn-primary">Register Now</a></p>
+                    </div>
+                </div>      
+            </div>
+            <div class="col-md-4 mb-3 d-flex services optionSection align-self-stretch px-4 ftco-animate">
+                <div class="d-block services-wrap text-center" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                    <div class="img" style="background-image: url(/images/prevComplaints.png);"></div>
+                    <div class="media-body py-4 px-3">
+                        <h3 class="heading">Submitted Requests</h3>
+                        <p>You can conveniently track the progress of your registered complaints regarding municipal services.</p>
+                        <p><a href="/user/track-complaint" class="btn btn-primary">Track Request</a></p>
+                    </div>
+                </div>    
+            </div>
+            <div class="col-md-4 mb-3 d-flex services optionSection align-self-stretch px-4 ftco-animate">
+                <div class="d-block services-wrap text-center" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                    <div class="img" style="background-image: url(/images/logout.png);"></div>
+                    <div class="media-body py-4 px-3">
+                        <h3 class="heading">Logout</h3>
+                        <p>We value your trust and prioritize safeguarding your information. Thank you for using our services!</p>
+                        <p><a href="/logout" class="btn btn-primary">Click to Exit</a></p>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('../components/footer.ejs') %>

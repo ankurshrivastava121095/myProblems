@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
-const port = 3001
+const port = 3010
 const connectDB = require('./db/connectDB')
 const bodyParser=require("body-parser")
 const fileUpload = require("express-fileupload");

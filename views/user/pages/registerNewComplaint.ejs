@@ -1,0 +1,104 @@
+<%- include('../components/header.ejs') %>
+
+<div class="hero-wrap js-fullheight" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+            <div class="col-md-7 ftco-animate">
+                <h2 class="subheading">Welcome to myProblems.com</h2>
+                <h1 class="mb-4">Your Civic Solution Partners</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section ftco-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 mb-3 d-flex services optionSection align-self-stretch px-4 ftco-animate"></div>
+            <div class="col-md-8 mb-3 d-flex services optionSection align-self-stretch px-4 ftco-animate">
+                <div class="d-block services-wrap text-center" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                    <div class="media-body py-4 px-3">
+                        <h3 class="heading">Register New complaint</h3>
+                        <p>Simply fill out our user-friendly form with details about the issue you're facing, and our team will swiftly address your concerns.</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="title">Title <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="problemImage">Image <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" id="problemImage">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="description">Description <span class="text-danger">*</span></label>
+                                    <textarea rows="3" id="description" class="form-control" placeholder="Enter Description"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="address">Address <span class="text-danger">*</span></label>
+                                    <textarea rows="3" id="address" class="form-control" placeholder="Enter Address"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <p><button type="button" id="submitButton" class="btn btn-primary">Register Now</button></p>
+                        <p><button type="button" id="loadingButton" class="btn btn-primary">Loading please wait...</button></p>
+                        <p id="responseMessage"></p>
+                    </div>
+                </div>      
+            </div>
+            <div class="col-md-2 mb-3 d-flex services optionSection align-self-stretch px-4 ftco-animate"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function() {
+        $('#loadingButton').hide()
+    });
+
+    $('#submitButton').click(function(){
+        $('#submitButton').hide()
+        $('#loadingButton').show()
+
+        const title = $('#title').val().trim()
+        const description = $('#description').val().trim()
+        const address = $('#address').val().trim()
+        const problemImage = $('#problemImage')[0].files[0]
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('address', address);
+        formData.append('problemImage', problemImage);
+
+        $.ajax({
+            url: '/user/store-complaint',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(response){
+                $('#responseMessage').html(response?.message);
+                const title = $('#title').val('')
+                const description = $('#description').val('')
+                const address = $('#address').val('')
+                $('#submitButton').show()
+                $('#loadingButton').hide()
+            },
+            error: function(xhr, status, error){
+                $('#responseMessage').html(xhr?.responseJSON?.message);
+                $('#submitButton').show()
+                $('#loadingButton').hide()
+            }
+        });
+    })
+</script>
+
+<%- include('../components/footer.ejs') %>
