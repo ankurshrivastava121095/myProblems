@@ -2,6 +2,10 @@
   "name": "myProblems",
   "version": "1.0.0",
   "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -18,5 +22,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.0",
     "nodemailer": "^6.9.11"
+  },
+  "engines": {
+    "node": ">=14.20.1"
   }
 }
